@@ -6,3 +6,4 @@ import 'package:flutter_blue/flutter_blue.dart';
 bool isConnected = false;
 List<ScanResult> scanResult = [];
 List<Color> textColors = [];
+var connectedDevice;

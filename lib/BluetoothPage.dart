@@ -72,6 +72,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
                   await result.device.connect();
                   print("pairing process succeeded ...");
                   setState(() {
+                    globals.connectedDevice = result.device;
                     globals.textColors[index] = Colors.green;
                     globals.isConnected = true;
                   });
@@ -80,6 +81,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
                   result.device.disconnect();
                   print("disconnecting process succeeded ...");
                   setState(() {
+                    globals.connectedDevice = null;
                     globals.textColors[index] = Colors.black;
                     globals.isConnected = false;
                   });

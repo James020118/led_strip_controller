@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'BluetoothPage.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'globals.dart' as globals;
+import 'dart:convert';
 
 class PresetsPage extends StatefulWidget {
   @override
@@ -24,6 +26,9 @@ class _PresetsPageState extends State<PresetsPage> {
     }
     _patternsSelected[index] = true;
   }
+
+  String val;
+  var bluetoothCharacteristic;
 
   @override
   Widget build(BuildContext context) {
@@ -293,6 +298,37 @@ class _PresetsPageState extends State<PresetsPage> {
                   ),
                 ],
               ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    onChanged: (value) {
+                      val = value;
+                    },
+                  ),
+                ),
+                RaisedButton(
+                  child: Text("Send"),
+                  onPressed: () async {
+                    if (globals.connectedDevice != null) {
+                      List<BluetoothService> services = await globals.connectedDevice.discoverServices();
+                      services.forEach((service) {
+                        List<BluetoothCharacteristic> blueChar = service.characteristics;
+                        blueChar.forEach((bc) {
+                          if (bc.uuid.toString().compareTo("0000ffe1-0000-1000-8000-00805f9b34fb") == 0) {
+                            bluetoothCharacteristic = bc;
+                            print("Characteristic found! ...");
+                          }
+                        });
+                      });
+                    }
+
+                    await bluetoothCharacteristic.write(utf8.encode(val), withoutResponse: true);
+                    print("Data transmission successful....");
+                  },
+                )
+              ],
             ),
           ],
         ),
