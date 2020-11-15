@@ -13,7 +13,8 @@ class _PresetsPageState extends State<PresetsPage> {
   double _brightnessSliderValue = 50;
 
   List<bool> _patternsSelected = [true, false, false];
-  List<bool> _frequenciesSelected = [true, true, true, true, true, true, true];
+  List<bool> _frequenciesSelected = [true, false, false, false, false, false, false];
+  String currentLightCorlor = "BLUE";
 
   void _togglePattern(int index) {
     for (int i = 0; i < 3; i++) {
@@ -22,8 +23,14 @@ class _PresetsPageState extends State<PresetsPage> {
     _patternsSelected[index] = true;
   }
 
+  void _toggleFrequency(int index) {
+    for (int i = 0; i < 7; i++) {
+      _frequenciesSelected[i] = false;
+    }
+    _frequenciesSelected[index] = true;
+  }
+
   String val;
-  //var bluetoothCharacteristic;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +63,7 @@ class _PresetsPageState extends State<PresetsPage> {
                 value: _brightnessSliderValue,
                 min: 0,
                 max: 100,
-                divisions: 20,
+                divisions: 5,
                 label: _brightnessSliderValue.round().toString(),
                 onChanged: (double value) {
                   setState(() {
@@ -118,7 +125,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     color: _frequenciesSelected[0] ? Colors.blue : Colors.grey,
                     onPressed: () {
                       setState(() {
-                        _frequenciesSelected[0] = !_frequenciesSelected[0];
+                        _toggleFrequency(0);
                       });
                     },
                     child: Text("63Hz"),
@@ -127,7 +134,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     color: _frequenciesSelected[1] ? Colors.blue : Colors.grey,
                     onPressed: () {
                       setState(() {
-                        _frequenciesSelected[1] = !_frequenciesSelected[1];
+                        _toggleFrequency(1);
                       });
                     },
                     child: Text("160Hz"),
@@ -136,7 +143,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     color: _frequenciesSelected[2] ? Colors.blue : Colors.grey,
                     onPressed: () {
                       setState(() {
-                        _frequenciesSelected[2] = !_frequenciesSelected[2];
+                        _toggleFrequency(2);
                       });
                     },
                     child: Text("400Hz"),
@@ -150,7 +157,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     color: _frequenciesSelected[3] ? Colors.blue : Colors.grey,
                     onPressed: () {
                       setState(() {
-                        _frequenciesSelected[3] = !_frequenciesSelected[3];
+                        _toggleFrequency(3);
                       });
                     },
                     child: Text("1kHz"),
@@ -159,7 +166,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     color: _frequenciesSelected[4] ? Colors.blue : Colors.grey,
                     onPressed: () {
                       setState(() {
-                        _frequenciesSelected[4] = !_frequenciesSelected[4];
+                        _toggleFrequency(4);
                       });
                     },
                     child: Text("2.5kHz"),
@@ -173,7 +180,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     color: _frequenciesSelected[5] ? Colors.blue : Colors.grey,
                     onPressed: () {
                       setState(() {
-                        _frequenciesSelected[5] = !_frequenciesSelected[5];
+                        _toggleFrequency(5);
                       });
                     },
                     child: Text("6.25kHz"),
@@ -182,7 +189,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     color: _frequenciesSelected[6] ? Colors.blue : Colors.grey,
                     onPressed: () {
                       setState(() {
-                        _frequenciesSelected[6] = !_frequenciesSelected[6];
+                        _toggleFrequency(6);
                       });
                     },
                     child: Text("16kHz"),
@@ -198,27 +205,38 @@ class _PresetsPageState extends State<PresetsPage> {
                 child: Text("Light Colors"),
               ),
 
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Current Light Color: $currentLightCorlor"),
+              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RaisedButton(
                     color: Color(0xFF0000FF),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "BLUE";
+                      });
                     },
                     child: Text("Blue"),
                   ),
                   RaisedButton(
                     color: Color(0xFF008000),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "GREEN";
+                      });
                     },
                     child: Text("Green"),
                   ),
                   RaisedButton(
                     color: Color(0xFFFF69B4),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "HOT PINK";
+                      });
                     },
                     child: Text("Hot Pink"),
                   ),
@@ -233,21 +251,27 @@ class _PresetsPageState extends State<PresetsPage> {
                   RaisedButton(
                     color: Color(0xFFFFA500),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "ORANGE";
+                      });
                     },
                     child: Text("Orange"),
                   ),
                   RaisedButton(
                     color: Color(0xFFFF0000),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "RED";
+                      });
                     },
                     child: Text("Red"),
                   ),
                   RaisedButton(
                     color: Color(0xFF800080),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "PURPLE";
+                      });
                     },
                     child: Text("Purple"),
                   ),
@@ -262,21 +286,27 @@ class _PresetsPageState extends State<PresetsPage> {
                   RaisedButton(
                     color: Color(0xFFFFFF00),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "YELLOW";
+                      });
                     },
                     child: Text("Yellow"),
                   ),
                   RaisedButton(
                     color: Color(0xFF40E0D0),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "TURQUOISE";
+                      });
                     },
                     child: Text("Turquoise"),
                   ),
                   RaisedButton(
                     color: Color(0xFFFF00FF),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "FUCHSIA";
+                      });
                     },
                     child: Text("Fuchsia"),
                   ),
@@ -291,21 +321,27 @@ class _PresetsPageState extends State<PresetsPage> {
                   RaisedButton(
                     color: Color(0xFFFFD700),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "GOLD";
+                      });
                     },
                     child: Text("Gold"),
                   ),
                   RaisedButton(
                     color: Color(0xFFFA8072),
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "SALMON";
+                      });
                     },
                     child: Text("Salmon"),
                   ),
                   RaisedButton(
                     color: Colors.white,
                     onPressed: () {
-                      setState(() {});
+                      setState(() {
+                        currentLightCorlor = "RAINBOW";
+                      });
                     },
                     child: Text("Rainbow"),
                   ),
@@ -328,25 +364,16 @@ class _PresetsPageState extends State<PresetsPage> {
                     onPressed: () async {
                       if (globals.bluetoothCharacteristic != null) {
                         await globals.bluetoothCharacteristic.write(utf8.encode(val), withoutResponse: true);
+                        print("Data transmission successful....");
+                        List<int> value = await globals.bluetoothCharacteristic.read();
+                        print(value);
                       }
-                      print("Data transmission successful....");
                     },
                   )
                 ],
               ),
               SizedBox(
                 height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "--${globals.t}--",
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                ],
               ),
             ],
           ),

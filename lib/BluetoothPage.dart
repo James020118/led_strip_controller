@@ -88,10 +88,10 @@ class _BluetoothPageState extends State<BluetoothPage> {
                         });
                       });
                     }
-                    if (globals.bluetoothCharacteristic != null) {
-                      List<int> value = await globals.bluetoothCharacteristic.read();
-                      print(value);
-                    }
+                    // if (globals.bluetoothCharacteristic != null) {
+                    //   List<int> value = await globals.bluetoothCharacteristic.read();
+                    //   print(value);
+                    // }
                   });
                 } else {
                   print("started disconnecting process ...");

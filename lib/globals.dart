@@ -8,6 +8,3 @@ List<ScanResult> scanResult = [];
 List<Color> textColors = [];
 var connectedDevice;
 var bluetoothCharacteristic;
-
-// variable for testing
-int t = 0;
