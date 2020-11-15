@@ -11,14 +11,9 @@ class PresetsPage extends StatefulWidget {
 
 class _PresetsPageState extends State<PresetsPage> {
   double _brightnessSliderValue = 50;
-  double _lightIntensitySliderValue = 50;
 
   List<bool> _patternsSelected = [true, false, false];
   List<bool> _frequenciesSelected = [true, true, true, true, true, true, true];
-
-  double _lightR = 0;
-  double _lightG = 0;
-  double _lightB = 0;
 
   void _togglePattern(int index) {
     for (int i = 0; i < 3; i++) {
@@ -28,7 +23,7 @@ class _PresetsPageState extends State<PresetsPage> {
   }
 
   String val;
-  var bluetoothCharacteristic;
+  //var bluetoothCharacteristic;
 
   @override
   Widget build(BuildContext context) {
@@ -47,290 +42,314 @@ class _PresetsPageState extends State<PresetsPage> {
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Brightness selection
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Brightness"),
-            ),
-            Slider(
-              value: _brightnessSliderValue,
-              min: 0,
-              max: 100,
-              divisions: 20,
-              label: _brightnessSliderValue.round().toString(),
-              onChanged: (double value) {
-                setState(() {
-                  _brightnessSliderValue = value;
-                });
-              },
-            ),
-            // -----------------------------------------------
-            // Light Intensity selection
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Light Intensity"),
-            ),
-            Slider(
-              value: _lightIntensitySliderValue,
-              min: 0,
-              max: 100,
-              divisions: 20,
-              label: _lightIntensitySliderValue.round().toString(),
-              onChanged: (double value) {
-                setState(() {
-                  _lightIntensitySliderValue = value;
-                });
-              },
-            ),
-            // ----------------------------------------------
-            // Light Patterns
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Light Patterns"),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Pattern 1: ____
-                RaisedButton(
-                  color: _patternsSelected[0] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _togglePattern(0);
-                    });
-                  },
-                  child: Text("Pattern 1"),
-                ),
-                // Pattern 2: ____
-                RaisedButton(
-                  color: _patternsSelected[1] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _togglePattern(1);
-                    });
-                  },
-                  child: Text("Pattern 2"),
-                ),
-                // Pattern 3: ____
-                RaisedButton(
-                  color: _patternsSelected[2] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _togglePattern(2);
-                    });
-                  },
-                  child: Text("Pattern 3"),
-                ),
-              ],
-            ),
-            // ------------------------------------------------
-            // Band Frequencies
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Band Frequencies"),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RaisedButton(
-                  color: _frequenciesSelected[0] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _frequenciesSelected[0] = !_frequenciesSelected[0];
-                    });
-                  },
-                  child: Text("63Hz"),
-                ),
-                RaisedButton(
-                  color: _frequenciesSelected[1] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _frequenciesSelected[1] = !_frequenciesSelected[1];
-                    });
-                  },
-                  child: Text("160Hz"),
-                ),
-                RaisedButton(
-                  color: _frequenciesSelected[2] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _frequenciesSelected[2] = !_frequenciesSelected[2];
-                    });
-                  },
-                  child: Text("400Hz"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RaisedButton(
-                  color: _frequenciesSelected[3] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _frequenciesSelected[3] = !_frequenciesSelected[3];
-                    });
-                  },
-                  child: Text("1kHz"),
-                ),
-                RaisedButton(
-                  color: _frequenciesSelected[4] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _frequenciesSelected[4] = !_frequenciesSelected[4];
-                    });
-                  },
-                  child: Text("2.5kHz"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RaisedButton(
-                  color: _frequenciesSelected[5] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _frequenciesSelected[5] = !_frequenciesSelected[5];
-                    });
-                  },
-                  child: Text("6.25kHz"),
-                ),
-                RaisedButton(
-                  color: _frequenciesSelected[6] ? Colors.blue : Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      _frequenciesSelected[6] = !_frequenciesSelected[6];
-                    });
-                  },
-                  child: Text("16kHz"),
-                ),
-              ],
-            ),
-            // -------------------------------------------------
-            // Light Colors
-            // TODO: USE PRESET COLORS
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Light Colors"),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Brightness selection
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Brightness"),
+              ),
+              Slider(
+                value: _brightnessSliderValue,
+                min: 0,
+                max: 100,
+                divisions: 20,
+                label: _brightnessSliderValue.round().toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _brightnessSliderValue = value;
+                  });
+                },
+              ),
+              // ----------------------------------------------
+              // Light Patterns
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Light Patterns"),
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Text("Red: $_lightR"),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Slider(
-                      value: _lightR,
-                      min: 0,
-                      max: 255,
-                      divisions: 255,
-                      label: _lightR.round().toString(),
-                      onChanged: (double value) {
-                        setState(() {
-                          _lightR = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Text("Green: $_lightG"),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Slider(
-                      value: _lightG,
-                      min: 0,
-                      max: 255,
-                      divisions: 255,
-                      label: _lightG.round().toString(),
-                      onChanged: (double value) {
-                        setState(() {
-                          _lightG = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Text("Blue: $_lightB"),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Slider(
-                      value: _lightB,
-                      min: 0,
-                      max: 255,
-                      divisions: 255,
-                      label: _lightB.round().toString(),
-                      onChanged: (double value) {
-                        setState(() {
-                          _lightB = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    onChanged: (value) {
-                      val = value;
-                    },
-                  ),
-                ),
-                RaisedButton(
-                  child: Text("Send"),
-                  onPressed: () async {
-                    if (globals.connectedDevice != null) {
-                      List<BluetoothService> services = await globals.connectedDevice.discoverServices();
-                      services.forEach((service) {
-                        List<BluetoothCharacteristic> blueChar = service.characteristics;
-                        blueChar.forEach((bc) {
-                          if (bc.uuid.toString().compareTo("0000ffe1-0000-1000-8000-00805f9b34fb") == 0) {
-                            bluetoothCharacteristic = bc;
-                            print("Characteristic found! ...");
-                          }
-                        });
+                  // Pattern 1: ____
+                  RaisedButton(
+                    color: _patternsSelected[0] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _togglePattern(0);
                       });
-                    }
+                    },
+                    child: Text("Pattern 1"),
+                  ),
+                  // Pattern 2: ____
+                  RaisedButton(
+                    color: _patternsSelected[1] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _togglePattern(1);
+                      });
+                    },
+                    child: Text("Pattern 2"),
+                  ),
+                  // Pattern 3: ____
+                  RaisedButton(
+                    color: _patternsSelected[2] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _togglePattern(2);
+                      });
+                    },
+                    child: Text("Pattern 3"),
+                  ),
+                ],
+              ),
+              // ------------------------------------------------
+              // Band Frequencies
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Band Frequencies"),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    color: _frequenciesSelected[0] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _frequenciesSelected[0] = !_frequenciesSelected[0];
+                      });
+                    },
+                    child: Text("63Hz"),
+                  ),
+                  RaisedButton(
+                    color: _frequenciesSelected[1] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _frequenciesSelected[1] = !_frequenciesSelected[1];
+                      });
+                    },
+                    child: Text("160Hz"),
+                  ),
+                  RaisedButton(
+                    color: _frequenciesSelected[2] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _frequenciesSelected[2] = !_frequenciesSelected[2];
+                      });
+                    },
+                    child: Text("400Hz"),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    color: _frequenciesSelected[3] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _frequenciesSelected[3] = !_frequenciesSelected[3];
+                      });
+                    },
+                    child: Text("1kHz"),
+                  ),
+                  RaisedButton(
+                    color: _frequenciesSelected[4] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _frequenciesSelected[4] = !_frequenciesSelected[4];
+                      });
+                    },
+                    child: Text("2.5kHz"),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    color: _frequenciesSelected[5] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _frequenciesSelected[5] = !_frequenciesSelected[5];
+                      });
+                    },
+                    child: Text("6.25kHz"),
+                  ),
+                  RaisedButton(
+                    color: _frequenciesSelected[6] ? Colors.blue : Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        _frequenciesSelected[6] = !_frequenciesSelected[6];
+                      });
+                    },
+                    child: Text("16kHz"),
+                  ),
+                ],
+              ),
+              // -------------------------------------------------
+              // Light Colors
+              // Preset Colors:
+              // Blue, Green, Hot Pink
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Light Colors"),
+              ),
 
-                    await bluetoothCharacteristic.write(utf8.encode(val), withoutResponse: true);
-                    print("Data transmission successful....");
-                  },
-                )
-              ],
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    color: Color(0xFF0000FF),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Blue"),
+                  ),
+                  RaisedButton(
+                    color: Color(0xFF008000),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Green"),
+                  ),
+                  RaisedButton(
+                    color: Color(0xFFFF69B4),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Hot Pink"),
+                  ),
+                ],
+              ),
+
+              // Preset Colors:
+              // Orange, Red, Purple
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    color: Color(0xFFFFA500),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Orange"),
+                  ),
+                  RaisedButton(
+                    color: Color(0xFFFF0000),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Red"),
+                  ),
+                  RaisedButton(
+                    color: Color(0xFF800080),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Purple"),
+                  ),
+                ],
+              ),
+
+              // Preset Colors:
+              // Yellow, Turquoise, Fuchsia,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    color: Color(0xFFFFFF00),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Yellow"),
+                  ),
+                  RaisedButton(
+                    color: Color(0xFF40E0D0),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Turquoise"),
+                  ),
+                  RaisedButton(
+                    color: Color(0xFFFF00FF),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Fuchsia"),
+                  ),
+                ],
+              ),
+
+              // Preset Colors:
+              // Gold, Salmon, Rainbow
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    color: Color(0xFFFFD700),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Gold"),
+                  ),
+                  RaisedButton(
+                    color: Color(0xFFFA8072),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Salmon"),
+                  ),
+                  RaisedButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text("Rainbow"),
+                  ),
+                ],
+              ),
+
+              // -------------------------------------------------
+              // the textfield to control onboard led
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {
+                        val = value;
+                      },
+                    ),
+                  ),
+                  RaisedButton(
+                    child: Text("Send"),
+                    onPressed: () async {
+                      if (globals.bluetoothCharacteristic != null) {
+                        await globals.bluetoothCharacteristic.write(utf8.encode(val), withoutResponse: true);
+                      }
+                      print("Data transmission successful....");
+                    },
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "--${globals.t}--",
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

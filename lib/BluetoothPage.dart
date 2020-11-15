@@ -71,10 +71,27 @@ class _BluetoothPageState extends State<BluetoothPage> {
                   print("started pairing process ...");
                   await result.device.connect();
                   print("pairing process succeeded ...");
-                  setState(() {
+                  setState(() async {
                     globals.connectedDevice = result.device;
                     globals.textColors[index] = Colors.green;
                     globals.isConnected = true;
+
+                    if (globals.connectedDevice != null) {
+                      List<BluetoothService> services = await globals.connectedDevice.discoverServices();
+                      services.forEach((service) {
+                        List<BluetoothCharacteristic> blueChar = service.characteristics;
+                        blueChar.forEach((bc) {
+                          if (bc.uuid.toString().compareTo("0000ffe1-0000-1000-8000-00805f9b34fb") == 0) {
+                            globals.bluetoothCharacteristic = bc;
+                            print("Characteristic found! ...");
+                          }
+                        });
+                      });
+                    }
+                    if (globals.bluetoothCharacteristic != null) {
+                      List<int> value = await globals.bluetoothCharacteristic.read();
+                      print(value);
+                    }
                   });
                 } else {
                   print("started disconnecting process ...");
@@ -84,6 +101,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
                     globals.connectedDevice = null;
                     globals.textColors[index] = Colors.black;
                     globals.isConnected = false;
+                    globals.bluetoothCharacteristic = null;
                   });
                 }
               },
