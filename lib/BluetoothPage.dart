@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'globals.dart' as globals;
+import 'dart:convert';
 
 class BluetoothPage extends StatefulWidget {
   @override
@@ -88,16 +89,21 @@ class _BluetoothPageState extends State<BluetoothPage> {
                         });
                       });
                     }
-                    // if (globals.bluetoothCharacteristic != null) {
-                    //   List<int> value = await globals.bluetoothCharacteristic.read();
-                    //   print(value);
-                    // }
+                    if (globals.bluetoothCharacteristic != null) {
+                      await globals.bluetoothCharacteristic
+                          .write(utf8.encode(globals.lightData), withoutResponse: true);
+                      print("Data transmission successful....");
+                      // read back to confirm successful data transmission
+                      List<int> value = await globals.bluetoothCharacteristic.read();
+                      print(value);
+                    }
                   });
                 } else {
                   print("started disconnecting process ...");
                   result.device.disconnect();
                   print("disconnecting process succeeded ...");
                   setState(() {
+                    globals.lightData = "d03A";
                     globals.connectedDevice = null;
                     globals.textColors[index] = Colors.black;
                     globals.isConnected = false;
