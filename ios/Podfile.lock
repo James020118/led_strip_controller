@@ -6,14 +6,11 @@ PODS:
   - flutter_blue/Protos (0.0.1):
     - Flutter
     - Protobuf (~> 3.11.4)
-  - flutter_bluetooth_serial (0.0.1):
-    - Flutter
   - Protobuf (3.11.4)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
-  - flutter_bluetooth_serial (from `.symlinks/plugins/flutter_bluetooth_serial/ios`)
 
 SPEC REPOS:
   trunk:
@@ -24,13 +21,10 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_blue:
     :path: ".symlinks/plugins/flutter_blue/ios"
-  flutter_bluetooth_serial:
-    :path: ".symlinks/plugins/flutter_bluetooth_serial/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_blue: eeb381dc4727a0954dede73515f683865494b370
-  flutter_bluetooth_serial: a42f785e4f7d2a6390d415cc39da5474ec2fef4f
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
