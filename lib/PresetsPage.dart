@@ -72,36 +72,36 @@ class _PresetsPageState extends State<PresetsPage> {
                 brightnessSliderValue = value;
               });
             },
-            onChangeEnd: (value) {
-              setState(() async {
+            onChangeEnd: (value) async {
+              setState(() {
                 brightnessSliderValue = value;
-                if (globals.bluetoothCharacteristic != null) {
-                  int _temp = value.round();
-                  switch (_temp) {
-                    case 0:
-                      globals.lightData = replaceCharAt(globals.lightData, 0, 'a');
-                      break;
-                    case 20:
-                      globals.lightData = replaceCharAt(globals.lightData, 0, 'b');
-                      break;
-                    case 40:
-                      globals.lightData = replaceCharAt(globals.lightData, 0, 'c');
-                      break;
-                    case 60:
-                      globals.lightData = replaceCharAt(globals.lightData, 0, 'd');
-                      break;
-                    case 80:
-                      globals.lightData = replaceCharAt(globals.lightData, 0, 'e');
-                      break;
-                    case 100:
-                      globals.lightData = replaceCharAt(globals.lightData, 0, 'f');
-                      break;
-                    default:
-                      break;
-                  }
-                  await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
-                }
               });
+              if (globals.bluetoothCharacteristic != null) {
+                int _temp = value.round();
+                switch (_temp) {
+                  case 0:
+                    globals.lightData = replaceCharAt(globals.lightData, 0, 'a');
+                    break;
+                  case 20:
+                    globals.lightData = replaceCharAt(globals.lightData, 0, 'b');
+                    break;
+                  case 40:
+                    globals.lightData = replaceCharAt(globals.lightData, 0, 'c');
+                    break;
+                  case 60:
+                    globals.lightData = replaceCharAt(globals.lightData, 0, 'd');
+                    break;
+                  case 80:
+                    globals.lightData = replaceCharAt(globals.lightData, 0, 'e');
+                    break;
+                  case 100:
+                    globals.lightData = replaceCharAt(globals.lightData, 0, 'f');
+                    break;
+                  default:
+                    break;
+                }
+                await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+              }
             },
           ),
           // ----------------------------------------------
@@ -116,45 +116,42 @@ class _PresetsPageState extends State<PresetsPage> {
               // Pattern 1: ____
               RaisedButton(
                 color: patternsSelected[0] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _togglePattern(0);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 1, '0');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 1, '0');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Pattern 1"),
               ),
               // Pattern 2: ____
               RaisedButton(
                 color: patternsSelected[1] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _togglePattern(1);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 1, '1');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 1, '1');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Pattern 2"),
               ),
               // Pattern 3: ____
               RaisedButton(
                 color: patternsSelected[2] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _togglePattern(2);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 1, '2');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 1, '2');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Pattern 3"),
               ),
@@ -171,43 +168,40 @@ class _PresetsPageState extends State<PresetsPage> {
             children: [
               RaisedButton(
                 color: frequenciesSelected[0] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _toggleFrequency(0);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 2, '3');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 2, '3');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("63Hz"),
               ),
               RaisedButton(
                 color: frequenciesSelected[1] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _toggleFrequency(1);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 2, '4');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 2, '4');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("160Hz"),
               ),
               RaisedButton(
                 color: frequenciesSelected[2] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _toggleFrequency(2);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 2, '5');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 2, '5');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("400Hz"),
               ),
@@ -218,29 +212,27 @@ class _PresetsPageState extends State<PresetsPage> {
             children: [
               RaisedButton(
                 color: frequenciesSelected[3] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _toggleFrequency(3);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 2, '6');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 2, '6');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("1kHz"),
               ),
               RaisedButton(
                 color: frequenciesSelected[4] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _toggleFrequency(4);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 2, '7');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 2, '7');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("2.5kHz"),
               ),
@@ -251,29 +243,27 @@ class _PresetsPageState extends State<PresetsPage> {
             children: [
               RaisedButton(
                 color: frequenciesSelected[5] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _toggleFrequency(5);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 2, '8');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 2, '8');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("6.25kHz"),
               ),
               RaisedButton(
                 color: frequenciesSelected[6] ? Colors.blue : Colors.grey,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     _toggleFrequency(6);
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 2, '9');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 2, '9');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("16kHz"),
               ),
@@ -298,43 +288,40 @@ class _PresetsPageState extends State<PresetsPage> {
             children: [
               RaisedButton(
                 color: Color(0xFF0000FF),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "BLUE";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'A');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'A');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Blue"),
               ),
               RaisedButton(
                 color: Color(0xFF008000),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "GREEN";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'B');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'B');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Green"),
               ),
               RaisedButton(
                 color: Color(0xFFFF69B4),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "HOT PINK";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'C');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'C');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Hot Pink"),
               ),
@@ -348,43 +335,40 @@ class _PresetsPageState extends State<PresetsPage> {
             children: [
               RaisedButton(
                 color: Color(0xFFFFA500),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "ORANGE";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'D');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'D');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Orange"),
               ),
               RaisedButton(
                 color: Color(0xFFFF0000),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "RED";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'E');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'E');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Red"),
               ),
               RaisedButton(
                 color: Color(0xFF800080),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "PURPLE";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'F');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'F');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Purple"),
               ),
@@ -398,43 +382,40 @@ class _PresetsPageState extends State<PresetsPage> {
             children: [
               RaisedButton(
                 color: Color(0xFFFFFF00),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "YELLOW";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'G');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'G');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Yellow"),
               ),
               RaisedButton(
                 color: Color(0xFF40E0D0),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "TURQUOISE";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'H');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'H');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Turquoise"),
               ),
               RaisedButton(
                 color: Color(0xFFFF00FF),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "FUCHSIA";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'I');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'I');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Fuchsia"),
               ),
@@ -448,43 +429,40 @@ class _PresetsPageState extends State<PresetsPage> {
             children: [
               RaisedButton(
                 color: Color(0xFFFFD700),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "GOLD";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'J');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'J');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Gold"),
               ),
               RaisedButton(
                 color: Color(0xFFFA8072),
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "SALMON";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'K');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'K');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Salmon"),
               ),
               RaisedButton(
                 color: Colors.white,
-                onPressed: () {
-                  setState(() async {
+                onPressed: () async {
+                  setState(() {
                     currentLightCorlor = "RAINBOW";
-                    if (globals.bluetoothCharacteristic != null) {
-                      globals.lightData = replaceCharAt(globals.lightData, 3, 'L');
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                    }
                   });
+                  if (globals.bluetoothCharacteristic != null) {
+                    globals.lightData = replaceCharAt(globals.lightData, 3, 'L');
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                  }
                 },
                 child: Text("Rainbow"),
               ),
