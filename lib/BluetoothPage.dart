@@ -72,32 +72,32 @@ class _BluetoothPageState extends State<BluetoothPage> {
                   print("started pairing process ...");
                   await result.device.connect();
                   print("pairing process succeeded ...");
-                  setState(() async {
+
+                  setState(() {
                     globals.connectedDevice = result.device;
                     globals.textColors[index] = Colors.green;
                     globals.isConnected = true;
-
-                    if (globals.connectedDevice != null) {
-                      List<BluetoothService> services = await globals.connectedDevice.discoverServices();
-                      services.forEach((service) {
-                        List<BluetoothCharacteristic> blueChar = service.characteristics;
-                        blueChar.forEach((bc) {
-                          if (bc.uuid.toString().compareTo("0000ffe1-0000-1000-8000-00805f9b34fb") == 0) {
-                            globals.bluetoothCharacteristic = bc;
-                            print("Characteristic found! ...");
-                          }
-                        });
-                      });
-                    }
-                    if (globals.bluetoothCharacteristic != null) {
-                      await globals.bluetoothCharacteristic
-                          .write(utf8.encode(globals.lightData), withoutResponse: true);
-                      print("Data transmission successful....");
-                      // read back to confirm successful data transmission
-                      List<int> value = await globals.bluetoothCharacteristic.read();
-                      print(value);
-                    }
                   });
+
+                  if (globals.connectedDevice != null) {
+                    List<BluetoothService> services = await globals.connectedDevice.discoverServices();
+                    services.forEach((service) {
+                      List<BluetoothCharacteristic> blueChar = service.characteristics;
+                      blueChar.forEach((bc) {
+                        if (bc.uuid.toString().compareTo("0000FFE1-0000-1000-8000-00805f9b34fb") == 0) {
+                          globals.bluetoothCharacteristic = bc;
+                          print("Characteristic found! ...");
+                        }
+                      });
+                    });
+                  }
+                  if (globals.bluetoothCharacteristic != null) {
+                    await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
+                    print("Data transmission successful....");
+                    // read back to confirm successful data transmission
+                    List<int> value = await globals.bluetoothCharacteristic.read();
+                    print(value);
+                  }
                 } else {
                   print("started disconnecting process ...");
                   result.device.disconnect();

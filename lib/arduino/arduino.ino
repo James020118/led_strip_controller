@@ -26,27 +26,27 @@ void loop()
     // value: a-f
     switch (state[0]){
       case 'a':
-        // change brightness to 0%
+        FastLED.setBrightness(0);
         Serial.println("Light Brightness at 0%");
         break;
       case 'b':
-        // change brightness to 20%
+        FastLED.setBrightness(20);
         Serial.println("Light Brightness at 20%");
         break;
       case 'c':
-        // change brightness to 40%
+        FastLED.setBrightness(40);
         Serial.println("Light Brightness at 40%");
         break;
       case 'd':
-        // change brightness to 60%
+        FastLED.setBrightness(60);
         Serial.println("Light Brightness at 60%");
         break;
       case 'e':
-        // change brightness to 80%
+        FastLED.setBrightness(80);
         Serial.println("Light Brightness at 80%");
         break;
       case 'f':
-        // change brightness to 100%
+        FastLED.setBrightness(100);
         Serial.println("Light Brightness at 100%");
         break;
       default:
