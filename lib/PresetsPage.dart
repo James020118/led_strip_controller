@@ -125,7 +125,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
                   }
                 },
-                child: Text("Pattern 1"),
+                child: Text("Spiral"),
               ),
               // Pattern 2: ____
               RaisedButton(
@@ -139,7 +139,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
                   }
                 },
-                child: Text("Pattern 2"),
+                child: Text("Reactive"),
               ),
               // Pattern 3: ____
               RaisedButton(
@@ -153,7 +153,7 @@ class _PresetsPageState extends State<PresetsPage> {
                     await globals.bluetoothCharacteristic.write(utf8.encode(globals.lightData), withoutResponse: true);
                   }
                 },
-                child: Text("Pattern 3"),
+                child: Text("Rainbow"),
               ),
             ],
           ),
